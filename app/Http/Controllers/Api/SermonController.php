@@ -8,6 +8,7 @@ use App\Http\Requests\SermonRequest;
 use App\Http\Resources\SermonResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SermonController extends Controller
 {
@@ -31,12 +32,15 @@ class SermonController extends Controller
     public function store(SermonRequest $request)
     {
         //
+        Log::error($request);
+        Log::error('sam');
+
         $sermon = Sermon::create([
             'title' => $request->title,
             'body' => $request->body,
-            'author' => Auth ::user()->id,
-            'updated_by' => Auth ::user()->id,
-            'published_by' => Auth ::user()->id,
+            'author' => Auth::id(),
+            'updated_by' => Auth::id(),
+            'published_by' => Auth ::id(),
 
         ]);
         return new SermonResource($sermon);
@@ -78,6 +82,7 @@ class SermonController extends Controller
     public function destroy(Sermon $sermon)
     {
         //
+        Log::error($sermon);
         $sermon->delete();
         return response()->noContent();
     }

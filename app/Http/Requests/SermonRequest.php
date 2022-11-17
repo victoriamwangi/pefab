@@ -13,7 +13,7 @@ class SermonRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,6 +27,8 @@ class SermonRequest extends FormRequest
             //
             'title' =>'required',
             'body' =>'required',
+            'author'   =>'required',
+            
         ];
     }
 }
